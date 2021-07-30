@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Новости . Яблоко в Сочи
+{% endblock %}
+
+{% block description %}
+    <meta name="description" content="Новости регионального отделения политической партии «Яблоко» в городе Сочи"/>
+{% endblock %}
+
+{% block link %}
+    <link href="{% static 'css/news/news.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/news/main_page.css' %}">
+    <link href="{% static 'css/sub_menu.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block sub-menu %}
+    {% if request.path == '/news/' %}
+        <h1>Все новости</h1>
+    {% elif request.path == '/blog/' %}
+        <h1>Блоги</h1>
+    {% elif request.path == '/publications/' %}
+        <h1>Публикации</h1>
+    {% endif %}
+    <div class="sub_menu">
+        <ul class="sub_menu_ul">
+            <li>
+                <a href="{% url 'news' type='blog' %}"
+                   {% if request.path == '/blog/' %}style="background: #728182"{% endif %}>БЛОГИ</a>
+            </li>
+            <li>
+                <a href="{% url 'news' type='news' %}"
+                   {% if request.path == '/news/' %}style="background: #728182"{% endif %}>ВСЕ</a>
+            </li>
+            <li>
+                <a href="{% url 'news' type='publications' %}"
+                   {% if request.path == '/publications/' %}style="background: #728182"{% endif %}>ПУБЛИКАЦИИ</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="last-news">
+        <div class="last-news-block">
+            <ul>
+                {% for one_news in all_news %}
+                    <li>
+                        <a href="{% url 'news_detail' pk=one_news.pk %}">
+                            <div>
+                                <img src="{{ one_news.image.url }}">
+                                <h4 class="news_type">{{ one_news.news_type }}</h4>
+                                <h4>{{ one_news.title }}</h4>
+                                <p>{{ one_news.published_date }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="pagination">
+    <span class="step-links">
+        {% if all_news.has_previous %}
+            <a href="?page={{ all_news.first_page }}" class="first_page_button"></a>
+            <a href="?page={{ all_news.previous_page_number }}" class="prev_page_button">Предыдущая</a>
+        {% endif %}
+
+        <span class="current"
+                {% if all_news.paginator.num_pages == 1 %}
+              style="display: none"
+                {% else %}
+              style="display: unset"
+                {% endif %}
+        >
+            Страница {{ all_news.number }} из {{ all_news.paginator.num_pages }}.
+        </span>
+
+        {% if all_news.has_next %}
+            <a href="?page={{ all_news.next_page_number }}" class="next_page_button"></a>
+            <a href="?page={{ all_news.paginator.num_pages }}" class="last_page_button"></a>
+        {% endif %}
+
+    </span>
+    </div>
+{% endblock %}

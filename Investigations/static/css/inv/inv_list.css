@@ -1,0 +1,225 @@
+.inv_list {
+    padding: 10px;
+}
+
+.inv_list_ul {
+    max-width: 1024px;
+    margin: auto;
+}
+
+.inv_list_li {
+    display: block;
+    margin: 10px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.inv_list_li a {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+}
+
+.inv_list_header, .inv_list_img {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    width: 50%;
+}
+
+.inv_list_img {
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    float: right;
+}
+
+.inv_list_status {
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(215, 18, 73);
+    text-align: left;
+    padding: 5px;
+    margin: 0;
+}
+
+.inv_list_title {
+    font-size: 1em;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.inv_list_description {
+    display: inline-block;
+    padding: 5px;
+    min-height: 90px;
+    height: 100%;
+}
+
+.bases_list_ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.bases_list_ul li {
+    display: block;
+    flex: 1;
+    overflow: hidden;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.bases_list_li a {
+    display: flex;
+    background: #b8c6c7;
+    transition: 0.2s all linear;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.bases_list_li a:hover {
+    background: #728182;
+}
+
+.bases_type {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.bases_type_end {
+    position: absolute;
+    display: inline-block;
+    right: 5px;
+}
+
+.bases_type_end::after {
+    font-family: 'Font Awesome 5 Free', serif;
+    content: '\f101';
+    font-weight: bold;
+}
+
+.slim_bases_list {
+    display: none;
+}
+
+.slim_bases_list_title {
+    display: none;
+}
+
+@media (max-width: 425px) {
+    .inv_list_header {
+        width: 100%;
+    }
+
+    .inv_list_status {
+        font-size: 0.9em;
+    }
+
+    .inv_list_img {
+        display: none;
+    }
+
+    .inv_list_description {
+        min-height: unset;
+        height: auto;
+    }
+
+    .bases_list_ul {
+        display: none;
+    }
+
+    .slim_bases_list {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .slim_bases_list_title {
+        display: inline-block;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: rgba(74, 161, 71, 100);
+        text-transform: uppercase;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .slim_bases_list label {
+        flex: 1;
+        display: inline-block;
+        position: relative;
+        background: #b8c6c7;
+        transition: 0.3s all linear;
+        color: white;
+        padding: 5px;
+        margin: 5px;
+        text-align: center;
+        overflow: hidden;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    }
+
+    .slim_bases_list a {
+        display: unset;
+        width: unset;
+        position: unset;
+    }
+
+    .slim_bases_list a::after {
+        display: none;
+    }
+
+    .toogle_li {
+        display: none;
+    }
+
+    input:checked + label {
+        flex: 5;
+        background: #728182;
+    }
+
+    input:checked + label a::after {
+        display: inline-block;
+        position: absolute;
+        content: ' ';
+        width: 100%;
+        height: 26px;
+        top: 0;
+        right: 0;
+    }
+
+    .slim_bases_type {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 12px;
+        width: 100%;
+    }
+
+    .slim_bases_type_end {
+        position: absolute;
+        display: inline-block;
+        right: 2px;
+        top: 5px;
+    }
+
+    .slim_bases_type_end::after {
+        font-family: 'Font Awesome 5 Free', serif;
+        content: '\f101';
+        font-weight: bold;
+    }
+}

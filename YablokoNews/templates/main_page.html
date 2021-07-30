@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load month_name_def %}
+
+{% block title %}
+    Яблоко в Сочи
+{% endblock %}
+
+{% block description %}
+    <meta name="description" content="Сайт регионального отделения политической партии «Яблоко» в городе Сочи"/>
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/news/slide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/news/main_page.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="welcome">
+        <slider>
+            <slide><p><span>Я</span> ПРОТИВ ПОВЫШЕНИЯ <br>
+                ПЕНСИОННОГО ВОЗРАСТА</p></slide>
+            <slide><p><span>Я</span> ВЫБИРАЮ<br>
+                БУДУЩЕЕ</p></slide>
+            <slide><p><span>Я</span> За свободу <br>
+                и справедливость</p></slide>
+            <slide><p><span>Я</span> за Реформы <br> для большинства</p></slide>
+        </slider>
+    </div>
+
+    <div class="last-news">
+        <div>
+            <h3>ПОСЛЕДНИЕ НОВОСТИ</h3>
+        </div>
+
+        <div class="last-news-block">
+            <ul>
+                {% for one_news in last_news %}
+                    <li>
+                        <a href="{% url 'news_detail' pk=one_news.pk %}">
+                            <div>
+                                <img src="{{ one_news.image.url }}">
+                                <h4 class="news_type">{{ one_news.news_type }}</h4>
+                                <h4>{{ one_news.title }}</h4>
+                                <p>{{ one_news.published_date }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="anons">
+        <div>
+            <h3>АНОНС</h3>
+        </div>
+        <div class="anons-div">
+            <ul>
+                {% for adv in advertisings %}
+                    <li>
+                        <div class="anons_date">
+                            <div class="anons_day">{{ adv.published_date.day }}</div>
+                            <div>{{ adv.published_date.month|month_name }}</div>
+                        </div>
+                        <div class="anons_title">
+                            <a href="{% url 'adv_detail' pk=adv.pk %}">{{ adv.title }}</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>
+                        <div class="anons_date">
+                            <div class="anons_day"></div>
+                            <div></div>
+                        </div>
+                        <div class="empty_anons_title">На сегодня нет запланированных мероприятий</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

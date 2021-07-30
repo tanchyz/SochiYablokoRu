@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    {% block description %}
+    {% endblock %}
+    <meta name="keywords" content="сочи, sochi, новости, news, политика, расследования, коррупция, митинг, митинг в сочи"/>
+    <meta name="google-site-verification" content="x272oq7cY8xzCiQbRRjBuv8g5O7sFiTi4Mzj5xpCNKE"/>
+    <meta name="yandex-verification" content="cf0711649f5f4635"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="fb:admins" content="zykovkb"/>
+    <meta property="fb:admins" content="100000553815449"/>
+    <meta property="fb:app_id" content="262581791046633"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:locale" content="ru_RU"/>
+    <meta name="twitter:card" content="summary">
+
+    {% block link %}
+    {% endblock %}
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon"/>
+    <link href="{% static 'css/news/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/news/slim-base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/news/footer.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+<body>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '262581791046633',
+            xfbml: true,
+            version: 'v3.1'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/ru_RU/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<header>
+    <div class="container main-menu-container">
+        <div class="auth_line">
+            <span class="search_line">
+                <input type="search" name="q" placeholder="  Поиск" class="search">
+                <input type="submit" class="submit" value="&#xf002;">
+            </span>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="login_button">ВЫХОД</a>
+                <div>{{ request.user }}</div>
+            {% else %}
+                <a href="{% url 'login' %}" class="login_button">ВХОД</a>
+            {% endif %}
+        </div>
+        <div class="main-logo">
+            <a href="/"><img src="{% static 'images/logo-white.png' %}">
+                <div>в Сочи</div>
+            </a>
+        </div>
+        <div class="main-menu">
+            <ul>
+                <li><a href="{% url 'news' type='news' %}">НОВОСТИ</a></li>
+                <li><a href="{% url 'projects' %}">ПРОЕКТЫ</a></li>
+                <li><a href="{% url 'contacts' %}">КОНТАКТЫ</a></li>
+                {#                <li><a href="/">ПОДДЕРЖАТЬ</a></li>#}
+            </ul>
+        </div>
+    </div>
+    <div class="slim-container">
+        <div class="slim-main-logo">
+            <a href="/"><img src="{% static 'images/logo-white.png' %}">
+                <div>в Сочи</div>
+            </a>
+        </div>
+        <input id="toggle" type="checkbox">
+        <label class="toggle-container" for="toggle">
+            <span class="button button-toggle"></span>
+        </label>
+        <nav class="nav">
+            <a class="nav-item" href="{% url 'news' type='news' %}">НОВОСТИ</a>
+            <a class="nav-item" href="{% url 'projects' %}">ПРОЕКТЫ</a>
+            <a class="nav-item" href="{% url 'contacts' %}">КОНТАКТЫ</a>
+            {#            <a class="nav-item" href="">ПОДДЕРЖАТЬ</a>#}
+        </nav>
+    </div>
+    {% block sub-menu %}
+    {% endblock %}
+</header>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">
+            <a href="https://yabloko.ru"><img src="{% static 'images/logo-white.png' %}"></a>
+        </div>
+        <div class="socials">
+            <a class="tg" href="#"></a>
+            <a class="fb" href="https://www.facebook.com/groups/1050363508368667/"></a>
+            <a class="yt" href="#"></a>
+        </div>
+    </div>
+</footer>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter50393311 = new Ya.Metrika2({
+                    id: 50393311,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true
+                });
+            } catch (e) {
+            }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/tag.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks2");
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/50393311" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>
